@@ -1,5 +1,6 @@
 package ss7.bai_tap.Colorable.Shape;
 
+
 public abstract class Shape {
     private String color = "green";
     private boolean filled = true;
@@ -37,4 +38,5 @@ public abstract class Shape {
     }
 
     public abstract double getArea();
+
 }

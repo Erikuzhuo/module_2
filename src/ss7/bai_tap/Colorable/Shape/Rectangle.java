@@ -1,8 +1,5 @@
 package ss7.bai_tap.Colorable.Shape;
 
-import ss7.bai_tap.Resizable.Management.Resizable;
-
-import java.util.Random;
 
 public class Rectangle extends Shape {
     private double width = 2.0;

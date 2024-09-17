@@ -1,6 +1,8 @@
 package ss7.bai_tap.Resizable.Shape;
 
-public abstract class Shape {
+import ss7.bai_tap.Resizable.Management.Resizable;
+
+public abstract class Shape implements Resizable {
     private String color = "green";
     private boolean filled = true;
 
@@ -35,4 +37,6 @@ public abstract class Shape {
                 + " and "
                 + (isFilled() ? "filled" : "not filled");
     }
+
+    public abstract double getArea();
 }
