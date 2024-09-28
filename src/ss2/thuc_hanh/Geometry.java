@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 public class Geometry {
     public static void main(String[] args) {
-        int choice;
+        int choice = -1;
         Scanner input = new Scanner(System.in);
         while(choice != 0) {
             System.out.println("Menu");
