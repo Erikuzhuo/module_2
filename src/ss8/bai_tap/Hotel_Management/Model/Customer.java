@@ -31,4 +31,14 @@ public class Customer extends Person {
     public void setAddress(String address) {
         this.address = address;
     }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id='" + id + '\'' +
+                ", name='" + getName() + '\'' +
+                ", birthday='" + getBirthday() + '\'' +
+                ", address='" + address + '\'' +
+                "} ";
+    }
 }

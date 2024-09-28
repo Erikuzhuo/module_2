@@ -1,15 +1,16 @@
 package ss8.bai_tap.Hotel_Management.Main;
 
 import ss8.bai_tap.Hotel_Management.Controller.CustomerControl;
+import ss8.bai_tap.Hotel_Management.Model.Customer;
 
 import java.util.Scanner;
 
 public class HotelManagement {
     public static void main(String[] args) {
+        Customer[] listOfCustomer = new Customer[5];
         Scanner scanner = new Scanner(System.in);
         int option;
-        boolean check=false;
-        do{
+        while(true){
         System.out.println("Kindly Choice Your Request: \n " +
                     "1. Add Customer Information;\n" +
                     "2. Delete Customer Information; \n" +
@@ -22,20 +23,22 @@ public class HotelManagement {
             CustomerControl customer = new CustomerControl();
             switch (option) {
                 case 1:
-                    customer.addCustomer();
+                    System.out.println();
+                    customer.addCustomer(listOfCustomer);
                     break;
                 case 2:
-                    customer.removeCustomer();
+                    customer.removeCustomer(listOfCustomer);
                     break;
                 case 3:
-                    customer.updateCustomer();
+                    customer.updateCustomer(listOfCustomer);
                     break;
                 case 4:
-                    customer.getListOfCustomer();
+                    customer.getListOfCustomer(listOfCustomer);
                     break;
-                default: check = true;
+                case 5:
+                    System.exit(0);
+                    break;
             }
-        }while (!check);
-        System.out.close();
+        }
     }
 }

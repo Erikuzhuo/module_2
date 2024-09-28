@@ -10,8 +10,6 @@ public abstract class Person {
 
     }
 
-    ;
-
     public Person(String name, LocalDate birthday) {
         this.name = name;
         this.birthday = birthday;
@@ -31,5 +29,13 @@ public abstract class Person {
 
     public void setBirthday(LocalDate birthday) {
         this.birthday = birthday;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" +
+                "name='" + name + '\'' +
+                ", birthday=" + birthday +
+                '}';
     }
 }
