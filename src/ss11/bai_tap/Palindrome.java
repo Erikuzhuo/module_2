@@ -13,9 +13,9 @@ public class Palindrome {
         Stack<Character> stack = new Stack<>();
         Queue<Character> queue = new ArrayDeque<>();
 
-        for (int i = 0; i < chars.length; i++) {
-            stack.push(chars[i]);
-            queue.add(chars[i]);
+        for (char aChar : chars) {
+            stack.push(aChar);
+            queue.add(aChar);
         }
 
 
