@@ -66,7 +66,7 @@ public class ProductManagment {
                 System.out.println(eachProduct);
             }
             confirm = scanner.nextLine();
-        } while (!confirmProcess(confirm));
+        } while (confirmProcess(confirm));
         Collections.addAll(products, tempList);
         System.out.println("Products has been created.");
     }
@@ -78,7 +78,7 @@ public class ProductManagment {
             System.out.println("Product ID need to remove: ");
             String removeID = scanner.nextLine();
 
-            while (Objects.equals(removeID, "") || !isProductIDExist(removeID)) {
+            while (removeID.isEmpty() || !isProductIDExist(removeID)) {
                 System.out.println("ID does not exist, Retype the ID or input 0 to exit.");
                 removeID = scanner.nextLine();
                 if (Objects.equals(removeID, "0")) {
@@ -93,7 +93,7 @@ public class ProductManagment {
             System.out.println("Are you sure want to remove? (Y/N) \n"
                     + productToRemove);
             confirm = scanner.nextLine();
-        } while (!confirmProcess(confirm));
+        } while (confirmProcess(confirm));
         products.remove(productToRemove);
         System.out.println("Product has been removed.");
     }
@@ -119,7 +119,7 @@ public class ProductManagment {
             System.out.println("Is this product that you want to update? (Y/N) \n" +
                     productToUpdate);
             confirm = scanner.nextLine();
-        } while (!confirmProcess(confirm));
+        } while (confirmProcess(confirm));
         do {
             System.out.println("Product ID can not be change, kindly input update name: ");
 
@@ -131,7 +131,7 @@ public class ProductManagment {
             System.out.println("Is this product new update information? (Y/N) \n" +
                     productToUpdate);
             confirm = scanner.nextLine();
-        } while (!confirmProcess(confirm));
+        } while (confirmProcess(confirm));
         for (Product change : products) {
             if (Objects.equals(change.getId(), productToUpdate.getId())) {
                 change.setName(productToUpdate.getName());
@@ -152,7 +152,7 @@ public class ProductManagment {
     }
 
     public boolean confirmProcess(String confirm) {
-        return Objects.equals(confirm, "Y");
+        return !Objects.equals(confirm, "Y");
     }
 
     public void sortList() {
