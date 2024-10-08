@@ -1,4 +1,4 @@
-package ss13;
+package ss13.bai_tap;
 
 import java.util.LinkedList;
 import java.util.Scanner;
