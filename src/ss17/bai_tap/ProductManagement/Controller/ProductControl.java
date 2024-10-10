@@ -12,14 +12,15 @@ public class ProductControl {
     List<Product> productList = readListFromFile();
 
     public void addProduct() {
-        if (!productList.isEmpty()) {
+        if (!(productList.size() >0)) {
             productList = new ArrayList<>();
         }
         System.out.println("How many product need to input? ");
         int count = Integer.parseInt(scanner.nextLine());
-        Product[] tempList = new Product[count];
+        Product[] tempList;
         String confirm;
         do {
+            tempList = new Product[count];
             for (int i = 0; i < tempList.length; i++) {
                 Product product = new Product();
                 String tempID;
@@ -47,7 +48,6 @@ public class ProductControl {
 
         } while (!confirmProcess(confirm));
         Collections.addAll(productList, tempList);
-        clearFile();
         writeListToFile(productList);
         System.out.println("Products successfully created.");
     }
@@ -74,7 +74,6 @@ public class ProductControl {
                 confirm = scanner.nextLine();
             } while (!confirmProcess(confirm));
             productList.remove(removeProduct);
-            clearFile();
             writeListToFile(productList);
             displayProduct();
             System.out.println("Product successfully deleted.");
