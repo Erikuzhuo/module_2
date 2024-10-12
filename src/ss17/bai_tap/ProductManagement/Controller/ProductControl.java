@@ -12,7 +12,7 @@ public class ProductControl {
     List<Product> productList = readListFromFile();
 
     public void addProduct() {
-        if (!(productList.size() >0)) {
+        if (productList.isEmpty()) {
             productList = new ArrayList<>();
         }
         System.out.println("How many product need to input? ");
