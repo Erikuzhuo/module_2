@@ -6,7 +6,6 @@ import java.util.regex.Pattern;
 
 public class ClassNameVerification {
     public static void main(String[] args) {
-        boolean check;
         Matcher matcher;
         String className;
         do {
@@ -16,7 +15,7 @@ public class ClassNameVerification {
             className = new String(scanner.nextLine());
             Pattern pattern = Pattern.compile(regex);
             matcher = pattern.matcher(className);
-        } while (check = !matcher.matches());
+        } while (!matcher.matches());
         System.out.println("Class "+className +" already created.");
 
     }
