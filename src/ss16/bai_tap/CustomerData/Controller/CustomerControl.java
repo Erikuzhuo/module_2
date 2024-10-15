@@ -1,14 +1,19 @@
-package ss10.Hotel_Management.Controller;
-import ss10.Hotel_Management.Model.Customer;
+package ss16.bai_tap.CustomerData.Controller;
+
+import ss16.bai_tap.CustomerData.Model.Customer;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+import java.util.Scanner;
 
 public class CustomerControl {
     Scanner scanner = new Scanner(System.in);
     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
-    public void createInfo(List<Customer>  customers) {
+    public void createInfo(List<Customer> customers) {
         String check;
         List<Customer> temp = new ArrayList<>();
         System.out.println("How Many New Customer: ");
@@ -47,6 +52,7 @@ public class CustomerControl {
             check = scanner.nextLine();
         } while (!Objects.equals(check, "Y"));
         customers.addAll(temp);
+        CustomerData.writeToFile(customers);
         System.out.println("Information Successfully Created.");
     }
 
@@ -86,6 +92,7 @@ public class CustomerControl {
             check = scanner.nextLine();
         } while (!Objects.equals(check, "Y"));
         customers.remove(index);
+        CustomerData.writeToFile(customers);
         System.out.println("Information Successfully Remove.");
     }
 
@@ -124,6 +131,7 @@ public class CustomerControl {
         customers.get(index).setName(temp.getName());
         customers.get(index).setAddress(temp.getAddress());
         customers.get(index).setBirthday(temp.getBirthday());
+        CustomerData.writeToFile(customers);
         System.out.println("Information Updated.");
     }
 }
