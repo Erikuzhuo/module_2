@@ -1,4 +1,4 @@
-package ss19.bai_tap.Class_Name_Verification;
+package ss19.bai_tap.PhoneNumberVerification;
 
 import java.util.Scanner;
 import java.util.regex.Matcher;
