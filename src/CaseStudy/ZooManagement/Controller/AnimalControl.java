@@ -1,4 +1,4 @@
-package CaseStudy.ZooManagement.Controller.MainControl;
+package CaseStudy.ZooManagement.Controller;
 
 import CaseStudy.ZooManagement.Model.*;
 import CaseStudy.ZooManagement.Pattern.PatternFormat;
