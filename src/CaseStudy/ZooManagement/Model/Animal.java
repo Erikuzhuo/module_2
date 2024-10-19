@@ -1,9 +1,8 @@
 package CaseStudy.ZooManagement.Model;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 
-public abstract class Animal implements Serializable {
+public abstract class Animal {
     String ID, name, gender;
     LocalDate birthDate;
 

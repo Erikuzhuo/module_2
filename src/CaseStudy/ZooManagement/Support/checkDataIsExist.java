@@ -1,4 +1,4 @@
-package CaseStudy.ZooManagement.Controller;
+package CaseStudy.ZooManagement.Support;
 
 import CaseStudy.ZooManagement.Model.ZooAnimal;
 import CaseStudy.ZooManagement.Model.ZooStaff;

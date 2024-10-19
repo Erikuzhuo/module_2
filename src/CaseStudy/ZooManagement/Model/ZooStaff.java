@@ -4,7 +4,7 @@ import java.time.LocalDate;
 
 public class ZooStaff extends Animal {
     private String address, position, email, note;
-    private int phoneNumber;
+    private String phoneNumber;
     private double salary;
     private LocalDate hireDate;
 
@@ -13,7 +13,7 @@ public class ZooStaff extends Animal {
 
     public ZooStaff(String ID, String name, String gender, LocalDate birthDate,
                     LocalDate hireDate, String position, double salary,
-                    String email, int phoneNumber, String address, String note) {
+                    String email, String phoneNumber, String address, String note) {
         super(ID, name, gender, birthDate);
         this.name = name;
         this.address = address;
@@ -59,11 +59,11 @@ public class ZooStaff extends Animal {
         this.salary = salary;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 

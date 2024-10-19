@@ -1,4 +1,4 @@
-package CaseStudy.ZooManagement.View;
+package CaseStudy.ZooManagement.Service;
 
 import java.util.Scanner;
 
