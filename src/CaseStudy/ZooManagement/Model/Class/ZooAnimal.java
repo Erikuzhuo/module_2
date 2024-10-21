@@ -1,4 +1,4 @@
-package CaseStudy.ZooManagement.Model;
+package CaseStudy.ZooManagement.Model.Class;
 
 import java.time.LocalDate;
 
@@ -10,7 +10,7 @@ public abstract class ZooAnimal extends Animal {
     }
 
     public ZooAnimal(String ID, String name, String gender, LocalDate birthDate,
-                     LocalDate moveInDate, LocalDate moveOutDate, String originFrom,
+                     LocalDate moveInDate,String originFrom,
                      String inchargeBy, String note) {
         super(ID, name, gender, birthDate);
         this.name = name;
@@ -19,7 +19,6 @@ public abstract class ZooAnimal extends Animal {
         this.note = note;
         this.birthDate = birthDate;
         this.moveInDate = moveInDate;
-        this.moveOutDate = moveOutDate;
     }
 
     public String getOriginFrom() {
@@ -54,13 +53,6 @@ public abstract class ZooAnimal extends Animal {
         this.moveInDate = moveInDate;
     }
 
-    public LocalDate getMoveOutDate() {
-        return moveOutDate;
-    }
-
-    public void setMoveOutDate(LocalDate moveOutDate) {
-        this.moveOutDate = moveOutDate;
-    }
 
 
     @Override
@@ -72,14 +64,13 @@ public abstract class ZooAnimal extends Animal {
                 ", birthDate=" + birthDate +
                 ", originFrom='" + originFrom + '\'' +
                 ", moveInDate=" + moveInDate +
-                ", moveOutDate=" + moveOutDate +
                 ", inchargeBy='" + inchargeBy + '\'' +
                 ", note='" + note + '\'' +
                 "} ";
     }
 
     public String convertToLine() {
-        return ID + "," + name + "," + gender + "," + birthDate + "," + originFrom + "," + moveInDate + "," +
-                moveOutDate + "," + inchargeBy + note;
+        return ID + "," + name + "," + gender + "," + birthDate + "," + originFrom + "," +
+                moveInDate + "," + inchargeBy + note;
     }
 }

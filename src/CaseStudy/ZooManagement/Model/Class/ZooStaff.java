@@ -1,4 +1,4 @@
-package CaseStudy.ZooManagement.Model;
+package CaseStudy.ZooManagement.Model.Class;
 
 import java.time.LocalDate;
 
@@ -8,7 +8,7 @@ public class ZooStaff extends Animal {
     private double salary;
     private LocalDate hireDate;
 
-    public ZooStaff() {
+    public ZooStaff(String ID) {
     }
 
     public ZooStaff(String ID, String name, String gender, LocalDate birthDate,

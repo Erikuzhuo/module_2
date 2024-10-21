@@ -1,4 +1,4 @@
-package CaseStudy.ZooManagement.Model;
+package CaseStudy.ZooManagement.Model.Class;
 
 import java.time.LocalDate;
 

@@ -1,12 +1,12 @@
-package CaseStudy.ZooManagement.Model;
+package CaseStudy.ZooManagement.Model.Class;
 
 import java.time.LocalDate;
 
 public class Elephant extends ZooAnimal implements IAnimalSound {
     public Elephant(String ID, String name, String gender, LocalDate birthDate,
-                    LocalDate moveInDate, LocalDate moveOutDate, String originFrom,
+                    LocalDate moveInDate,  String originFrom,
                     String inchargeBy, String note) {
-        super(ID, name, gender, birthDate, moveInDate, moveOutDate, originFrom,
+        super(ID, name, gender, birthDate, moveInDate, originFrom,
                 inchargeBy, note);
     }
 
@@ -15,7 +15,7 @@ public class Elephant extends ZooAnimal implements IAnimalSound {
 
 
     @Override
-    public String Sound() {
-        return "whoom....";
+    public String eatFood() {
+        return "Grass and Fruit.";
     }
 }
