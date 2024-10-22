@@ -21,7 +21,7 @@ public class AnimalControl {
         String confirm, tempID, tempGender, tempBirthDate, tempMoveInDate, tempInCharge;
         int choiceOption;
         String firstLetter = null;
-        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.parse("1940/01/01"),minMoveInDate=LocalDate.parse("2010/01/01");
+        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.of(1940,01,01),minMoveInDate=LocalDate.of(2010,01,01);
 
         if (!staffs.isEmpty()) {
             //vòng lặp xác nhận thông tin nhập trước khi đồng bộ
@@ -250,7 +250,7 @@ public class AnimalControl {
         int option, index = 0;
         boolean check = true, continueEditing = true;
         ZooAnimal updateAnimal = null;
-        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.parse("1940/01/01"),minMoveInDate=LocalDate.parse("2010/01/01");
+        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.of(1940,01,01),minMoveInDate=LocalDate.of(2010,01,01);
 
         do {
             System.out.println("Input Animal ID need update: ");

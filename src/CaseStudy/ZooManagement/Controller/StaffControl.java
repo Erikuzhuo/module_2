@@ -20,7 +20,7 @@ public class StaffControl {
         ZooStaff[] staffTempList;
         boolean continueAdding = true, check = true;
         String confirm, tempID, tempGender, tempBirthDate, tempNumber, tempEmail, tempHireDate;
-        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.parse("1940/01/01"),minHireDate=LocalDate.parse("2010/01/01");
+        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.of(1940,01,01),minHireDate=LocalDate.of(2010,01,01);
 
         //vòng lặp xác nhận thông tin nhập trước khi đồng bộ
         do {
@@ -214,7 +214,7 @@ public class StaffControl {
         int option, index = 0;
         boolean check = true, continueEditing = true;
         ZooStaff updateStaff = null;
-        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.parse("1940/01/01"),minHireDate=LocalDate.parse("2010/01/01");
+        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.of(1940,01,01),minHireDate=LocalDate.of(2010,01,01);
 
         do {
             if (!staffList.isEmpty()) {
