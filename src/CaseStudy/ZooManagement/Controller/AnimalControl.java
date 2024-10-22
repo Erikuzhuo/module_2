@@ -36,6 +36,7 @@ public class AnimalControl {
                 // vòng lặp nhận thông tin cho từng đối tượng
                 animalTempList = new ZooAnimal[newAddNumber];
                 for (int i = 0; i < animalTempList.length; i++) {
+                    ZooAnimal zooAnimal = null;
                     // Phân Loại Động Vật
                     do {
                         System.out.println("What is the animal kind number: \n" +
@@ -47,19 +48,19 @@ public class AnimalControl {
                         choiceOption = Integer.parseInt(scanner.nextLine());
                         switch (choiceOption) {
                             case 1:
-                                animalTempList[i] = new Elephant();
+                                zooAnimal = new Elephant();
                                 firstLetter = "E";
                                 break;
                             case 2:
-                                animalTempList[i] = new Monkey();
+                                zooAnimal = new Monkey();
                                 firstLetter = "M";
                                 break;
                             case 3:
-                                animalTempList[i] = new Owl();
+                                zooAnimal = new Owl();
                                 firstLetter = "O";
                                 break;
                             case 4:
-                                animalTempList[i] = new Tiger();
+                                zooAnimal = new Tiger();
                                 firstLetter = "T";
                                 break;
                             case 5:
@@ -96,11 +97,11 @@ public class AnimalControl {
 
 
                     } while (!check);
-                    animalTempList[i].setID(tempID);
+                    zooAnimal.setID(tempID);
 
                     // input name
                     System.out.println("Input name of Animal number " + (i + 1) + ":");
-                    animalTempList[i].setName(scanner.nextLine());
+                    zooAnimal.setName(scanner.nextLine());
 
                     // input gender
                     do {
@@ -111,7 +112,7 @@ public class AnimalControl {
                             System.out.println("Invalid input. Kindly re-input.");
                         }
                     } while (!check);
-                    animalTempList[i].setGender(tempGender);
+                    zooAnimal.setGender(tempGender);
 
                     // input BD
                     do {
@@ -128,7 +129,7 @@ public class AnimalControl {
                             check = false;
                         }
                     } while (!check);
-                    animalTempList[i].setBirthDate(LocalDate.parse(tempBirthDate));
+                    zooAnimal.setBirthDate(LocalDate.parse(tempBirthDate));
 
                     // input move in date
                     do {
@@ -145,11 +146,11 @@ public class AnimalControl {
                             check = false;
                         }
                     } while (!check);
-                    animalTempList[i].setMoveInDate(LocalDate.parse(tempMoveInDate));
+                    zooAnimal.setMoveInDate(LocalDate.parse(tempMoveInDate));
 
                     // input origin
                     System.out.println("Input origin of animal number " + (i + 1) + " from:");
-                    animalTempList[i].setOriginFrom(scanner.nextLine());
+                    zooAnimal.setOriginFrom(scanner.nextLine());
 
                     // input in-charge
                     do {
@@ -168,12 +169,14 @@ public class AnimalControl {
                         }
                     } while (!check);
                     if (!continueAdding) break;
-                    animalTempList[i].setInchargeBy(tempInCharge);
+                    zooAnimal.setInchargeBy(tempInCharge);
 
                     // input note
                     System.out.println("Input note of animal number " + (i + 1) + ":");
-                    animalTempList[i].setNote(today + "Created Animal; Food need to prepare: " + animalTempList[i].eatFood()
+                    zooAnimal.setNote(today + "Created Animal; Food need to prepare: " + zooAnimal.eatFood()
                             + ". Other note: " + scanner.nextLine() + ".");
+
+                    animalTempList[i] = zooAnimal;
                 }
                 // exit
                 if (!continueAdding) break;
@@ -206,7 +209,7 @@ public class AnimalControl {
     public static void deleteAnimal() {
         Scanner scanner = new Scanner(System.in);
         List<ZooAnimal> animalList = AnimalFile.readAnimalFromFile();
-        String confirm = "", tempID;
+        String confirm, tempID;
         ZooAnimal deleteAnimal = null;
 
         do {
@@ -340,7 +343,7 @@ public class AnimalControl {
                                 do {
                                     System.out.println("Input in-charge person: | input 0 if you want to exit.");
                                     tempInCharge = scanner.nextLine();
-                                    if (tempInCharge != "0") {
+                                    if (!tempInCharge.equals("0")) {
                                         if (!staffs.isEmpty()) {
                                             for (ZooStaff checkStaff : staffs) {
                                                 if (tempInCharge.isEmpty() || !Objects.equals(checkStaff.getName(), tempInCharge)) {
@@ -385,7 +388,6 @@ public class AnimalControl {
                 if (!continueEditing) break;
                 else {
                     System.out.println("Update completed. Do you want update other animal? (Y/N)");
-                    confirm = "";
                     confirm = scanner.nextLine();
                 }
             } else {
