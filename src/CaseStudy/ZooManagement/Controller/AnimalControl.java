@@ -6,7 +6,6 @@ import CaseStudy.ZooManagement.Model.Class.*;
 import CaseStudy.ZooManagement.Pattern.PatternFormat;
 import CaseStudy.ZooManagement.Support.checkDataIsExist;
 
-import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -199,7 +198,7 @@ public class AnimalControl {
                         Arrays.toString(animalTempList));
                 confirm = scanner.nextLine();
 
-            } while (!Objects.equals(confirm, "Y") || !Objects.equals(confirm, "y"));
+            } while (!confirm.equalsIgnoreCase("Y"));
 
             // nhập dữ liệ vào file và kết thúc.
             if (!continueAdding) {
@@ -245,7 +244,7 @@ public class AnimalControl {
                     + (deleteAnimal != null ? deleteAnimal.toString() : null));
             confirm = scanner.nextLine();
 
-        } while (!Objects.equals(confirm, "Y") || !Objects.equals(confirm, "y"));
+        } while (!confirm.equalsIgnoreCase("Y"));
         if (tempID.equals("0")) {
             System.out.println("Exit and cancelled delete.");
         } else {
@@ -411,7 +410,7 @@ public class AnimalControl {
                                 + updateAnimal.toString());
                         confirm = scanner.nextLine();
                     }
-                } while (!Objects.equals(confirm, "Y") || !Objects.equals(confirm, "y"));
+                } while (!confirm.equalsIgnoreCase("Y"));
 
                 if (!continueEditing) break;
                 else {
@@ -423,7 +422,7 @@ public class AnimalControl {
                 continueEditing = false;
                 break;
             }
-        } while (!Objects.equals(confirm, "Y") || !Objects.equals(confirm, "y"));
+        } while (!confirm.equalsIgnoreCase("Y"));
         if (!continueEditing) {
             System.out.println("Cancelled Editing.");
         } else {

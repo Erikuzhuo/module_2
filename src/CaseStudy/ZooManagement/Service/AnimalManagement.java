@@ -7,11 +7,11 @@ import java.util.Scanner;
 public class AnimalManagement {
     public static void animalControl(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choice your option number: " +
-                "1. Create Animal Information." +
-                "2. Update Animal Information." +
-                "3. Delete Animal Information." +
-                "4. Display Animal Data." +
+        System.out.println("Choice your option number: \n" +
+                "1. Create Animal Information. \n" +
+                "2. Update Animal Information. \n" +
+                "3. Delete Animal Information. \n" +
+                "4. Display Animal Data. \n" +
                 "5. Exit.");
         int animalOption = scanner.nextInt();
         switch (animalOption) {

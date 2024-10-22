@@ -19,9 +19,9 @@ public class StaffControl {
         ZooStaff[] staffTempList;
         boolean continueAdding = true, check = true;
         String confirm, tempID, tempGender, tempBirthDate, tempNumber, tempEmail, tempHireDate;
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
         LocalDate today = LocalDate.now(), minBirthDate = LocalDate.of(1940, 1, 1),
                 minHireDate = LocalDate.of(2010, 1, 1);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
         //vòng lặp xác nhận thông tin nhập trước khi đồng bộ
         do {
@@ -175,7 +175,7 @@ public class StaffControl {
                     Arrays.toString(staffTempList));
             confirm = scanner.nextLine();
 
-        } while (!Objects.equals(confirm, "Y") || !Objects.equals(confirm, "y"));
+        } while (!confirm.equalsIgnoreCase("Y"));
 
         // nhập dữ liệu vào file và kết thúc.
         if (!continueAdding) {
@@ -220,7 +220,7 @@ public class StaffControl {
                     + (deleteStaff != null ? deleteStaff.toString() : null));
             confirm = scanner.nextLine();
 
-        } while (!Objects.equals(confirm, "Y") || !Objects.equals(confirm, "y"));
+        } while (!confirm.equalsIgnoreCase("Y"));
         if (tempID.equals("0")) {
             System.out.println("Exit and cancelled delete.");
         } else {
@@ -398,7 +398,7 @@ public class StaffControl {
                                 + updateStaff.toString());
                         confirm = scanner.nextLine();
                     }
-                } while (!Objects.equals(confirm, "Y") || !Objects.equals(confirm, "y"));
+                } while (!confirm.equalsIgnoreCase("Y"));
 
                 if (!continueEditing) break;
                 else {
@@ -410,7 +410,7 @@ public class StaffControl {
                 continueEditing = false;
                 break;
             }
-        } while (!Objects.equals(confirm, "Y") || !Objects.equals(confirm, "y"));
+        } while (!confirm.equalsIgnoreCase("Y"));
         if (!continueEditing) {
             System.out.println("Cancelled Editing.");
         } else {
