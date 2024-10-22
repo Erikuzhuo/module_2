@@ -12,11 +12,12 @@ import java.util.Objects;
 import java.util.Scanner;
 
 public class StaffControl {
-    static Scanner scanner = new Scanner(System.in);
+
 
     public static void createStaff() {
-        List<ZooStaff> staffList = StaffFile.readStaffFromFile();
-        ZooStaff[] staffTempList;
+        Scanner scanner = new Scanner(System.in);
+        List<Admin> staffList = StaffFile.readStaffFromFile();
+        Admin[] staffTempList;
         boolean continueAdding = true, check = true;
         String confirm, tempID, tempGender, tempBirthDate, tempNumber, tempEmail, tempHireDate;
         String firstLetter = null;
@@ -32,7 +33,7 @@ public class StaffControl {
             }
 
             // vòng lặp nhận thông tin cho từng đối tượng
-            staffTempList = new ZooStaff[newAddNumber];
+            staffTempList = new Admin[newAddNumber];
             for (int i = 0; i < staffTempList.length; i++) {
                 // input ID
                 do {
@@ -148,16 +149,17 @@ public class StaffControl {
     }
 
     public static void displayStaffList() {
-        List<ZooStaff> list = StaffFile.readStaffFromFile();
-        for(ZooStaff staff:list){
+        List<Admin> list = StaffFile.readStaffFromFile();
+        for(Admin staff:list){
             System.out.println(staff.toString());
         }
     }
 
     public static void deleteStaff() {
-        List<ZooStaff> staffList = StaffFile.readStaffFromFile();
+        Scanner scanner = new Scanner(System.in);
+        List<Admin> staffList = StaffFile.readStaffFromFile();
         String confirm, tempID;
-        ZooStaff deleteStaff = null;
+        Admin deleteStaff = null;
 
         do {
             System.out.println("Input staff ID: ");
@@ -169,7 +171,7 @@ public class StaffControl {
             }
             if (tempID.equals("0")) break;
 
-            for (ZooStaff Staff : staffList) {
+            for (Admin Staff : staffList) {
                 if (Objects.equals(Staff.getID(), tempID)) {
                     deleteStaff = Staff;
                     break;
@@ -190,12 +192,13 @@ public class StaffControl {
         }
     }
 
-    public static void updateAnimalList() {
-        List<ZooStaff> staffList = StaffFile.readStaffFromFile();
+    public static void updateStaffList() {
+        Scanner scanner = new Scanner(System.in);
+        List<Admin> staffList = StaffFile.readStaffFromFile();
         String confirm, checkID, tempBirthDate, tempGender, tempEmail, tempNumber;
         int option, index = 0;
         boolean check = true, continueEditing = true;
-        ZooStaff updateStaff = null;
+        Admin updateStaff = null;
         LocalDate today = LocalDate.now();
 
         do {
@@ -209,7 +212,7 @@ public class StaffControl {
                 }
                 if (checkID.equals("0")) break;
 
-                for (ZooStaff staff : staffList) {
+                for (Admin staff : staffList) {
                     if (Objects.equals(staff.getID(), checkID)) {
                         updateStaff = staff;
                         index = staffList.indexOf(staff);

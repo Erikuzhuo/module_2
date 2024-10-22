@@ -10,11 +10,12 @@ import java.time.LocalDate;
 import java.util.*;
 
 public class AnimalControl {
-    static Scanner scanner = new Scanner(System.in);
+
 
     public static void createAninmal() {
+        Scanner scanner = new Scanner(System.in);
         List<ZooAnimal> animalList = AnimalFile.readAnimalFromFile();
-        List<ZooStaff> staffs = StaffFile.readStaffFromFile();
+        List<Admin> staffs = StaffFile.readStaffFromFile();
         ZooAnimal[] animalTempList;
         boolean continueAdding = true, check = true;
         String confirm, tempID, tempGender, tempBirthDate, tempMoveInDate, tempInCharge;
@@ -143,7 +144,7 @@ public class AnimalControl {
                         System.out.println("Input in-charge person: | input 0 if you want to exit.");
                         tempInCharge = scanner.nextLine();
                         if (!Objects.equals(tempInCharge, "0")) {
-                            for (ZooStaff checkStaff : staffs) {
+                            for (Admin checkStaff : staffs) {
                                 if (tempInCharge.isEmpty() || !Objects.equals(checkStaff.getName(), tempInCharge)) {
                                     check = false;
                                     System.out.println("Staff member not exist. Please re-input.");
@@ -191,6 +192,7 @@ public class AnimalControl {
     }
 
     public static void deleteAnimal() {
+        Scanner scanner = new Scanner(System.in);
         List<ZooAnimal> animalList = AnimalFile.readAnimalFromFile();
         String confirm = "", tempID;
         ZooAnimal deleteAnimal = null;
@@ -227,6 +229,7 @@ public class AnimalControl {
     }
 
     public static void updateAnimalList() {
+        Scanner scanner = new Scanner(System.in);
         List<ZooAnimal> animalList = AnimalFile.readAnimalFromFile();
         String confirm = "", checkID, tempBirthDate, tempGender, tempMoveIn, tempInCharge;
         int option, index = 0;
@@ -308,14 +311,14 @@ public class AnimalControl {
                             updateAnimal.setMoveInDate(LocalDate.parse(tempMoveIn));
                             break;
                         case 6:
-                            List<ZooStaff> staffs = StaffFile.readStaffFromFile();
+                            List<Admin> staffs = StaffFile.readStaffFromFile();
                             if (!staffs.isEmpty()) {
                                 do {
                                     System.out.println("Input in-charge person: | input 0 if you want to exit.");
                                     tempInCharge = scanner.nextLine();
                                     if (tempInCharge != "0") {
                                         if (!staffs.isEmpty()) {
-                                            for (ZooStaff checkStaff : staffs) {
+                                            for (Admin checkStaff : staffs) {
                                                 if (tempInCharge.isEmpty() || !Objects.equals(checkStaff.getName(), tempInCharge)) {
                                                     check = false;
                                                     System.out.println("Staff member not exist. Please re-input.");

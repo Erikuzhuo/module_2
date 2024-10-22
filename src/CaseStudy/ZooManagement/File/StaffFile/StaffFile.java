@@ -1,6 +1,6 @@
 package CaseStudy.ZooManagement.File.StaffFile;
 
-import CaseStudy.ZooManagement.Model.Class.ZooStaff;
+import CaseStudy.ZooManagement.Model.Class.Admin;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -10,8 +10,8 @@ import java.util.List;
 public class StaffFile {
     public static final String PARENT_PATH = "src/CaseStudy/ZooManagement/File/StaffFile";
 
-    public static List<ZooStaff> readStaffFromFile() {
-        List<ZooStaff> staffList = new ArrayList<>();
+    public static List<Admin> readStaffFromFile() {
+        List<Admin> staffList = new ArrayList<>();
         File staffFile = new File(PARENT_PATH, "StaffFile.CSV");
         try {
             if (!staffFile.exists()) {
@@ -26,7 +26,7 @@ public class StaffFile {
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 String[] staffString = line.split(",");
-                ZooStaff staff = getZooStaff(staffString);
+                Admin staff = getZooStaff(staffString);
                 staffList.add(staff);
                 bufferedReader.close();
             }
@@ -36,8 +36,8 @@ public class StaffFile {
         return staffList;
     }
 
-    private static ZooStaff getZooStaff(String[] staffString) {
-        ZooStaff staff = null;
+    private static Admin getZooStaff(String[] staffString) {
+        Admin staff = null;
         if (staffString.length == 11) {
             String ID = staffString[0];
             String name = staffString[1];
@@ -51,13 +51,13 @@ public class StaffFile {
             String address = staffString[9];
             String note = staffString[10];
 
-            staff = new ZooStaff(ID, name, gender, birthDate, hireDate, position, salary, email, phoneNumber, address, note);
+            staff = new Admin(ID, name, gender, birthDate, hireDate, position, salary, email, phoneNumber, address, note);
 
         }
         return staff;
     }
 
-    public static void writeStaffToFile(List<ZooStaff> list) {
+    public static void writeStaffToFile(List<Admin> list) {
         File staffFile = new File(PARENT_PATH, "StaffFile.CSV");
         try {
             if (!staffFile.exists()) {
