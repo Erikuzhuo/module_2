@@ -2,7 +2,7 @@ package CaseStudy.ZooManagement.Model.Class;
 
 import java.time.LocalDate;
 
-public abstract class ZooAnimal extends Animal {
+public abstract class ZooAnimal extends Animal implements IAnimalEat {
     private String originFrom, inchargeBy, note;
     private LocalDate moveInDate, moveOutDate;
 

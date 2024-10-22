@@ -15,14 +15,12 @@ public class ZooStaff extends Animal {
                     LocalDate hireDate, String position, double salary,
                     String email, String phoneNumber, String address, String note) {
         super(ID, name, gender, birthDate);
-        this.name = name;
         this.address = address;
         this.position = position;
         this.email = email;
         this.salary = salary;
         this.phoneNumber = phoneNumber;
         this.hireDate = hireDate;
-        this.birthDate = birthDate;
         this.note = note;
     }
 

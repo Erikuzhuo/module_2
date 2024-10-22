@@ -2,7 +2,7 @@ package CaseStudy.ZooManagement.Model.Class;
 
 import java.time.LocalDate;
 
-public class Tiger extends ZooAnimal implements IAnimalSound {
+public class Tiger extends ZooAnimal {
     public Tiger(String ID, String name, String gender, LocalDate birthDate,
                  LocalDate moveInDate, String originFrom,
                  String inchargeBy, String note) {

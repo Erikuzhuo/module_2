@@ -57,7 +57,7 @@ public class StaffFile {
         return staff;
     }
 
-    public static void writeStaffToList(List<ZooStaff> list) {
+    public static void writeStaffToFile(List<ZooStaff> list) {
         File staffFile = new File(PARENT_PATH, "StaffFile.CSV");
         try {
             if (!staffFile.exists()) {
@@ -77,6 +77,25 @@ public class StaffFile {
                 }
             }
             bufferedWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static void clearList() {
+        File staffFile = new File(PARENT_PATH, "StaffFile.CSV");
+        try {
+            if (!staffFile.exists()) {
+                System.out.println("File not exist. Creating....");
+                staffFile.createNewFile();
+                System.out.println("Files created. Writing....");
+            }
+            System.out.println("Writing...");
+            FileWriter fileWriter = new FileWriter(staffFile, false);
+            BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
+            bufferedWriter.write("");
+            bufferedWriter.close();
+            fileWriter.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
