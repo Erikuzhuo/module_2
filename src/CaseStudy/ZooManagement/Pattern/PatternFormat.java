@@ -37,7 +37,7 @@ public class PatternFormat {
     }
 
     public static boolean datePattern(String date) {
-        regex = "^\\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[12][0-9]|3[01])$";
+        regex = "^\\d{4}/(0[1-9]|1[0-2])/(0[1-9]|[12][0-9]|3[01])$";
         pattern = Pattern.compile(regex);
         matcher = pattern.matcher(date);
         return matcher.matches();

@@ -7,6 +7,7 @@ import CaseStudy.ZooManagement.Pattern.PatternFormat;
 import CaseStudy.ZooManagement.Support.checkDataIsExist;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 
 public class AnimalControl {
@@ -23,6 +24,7 @@ public class AnimalControl {
         String firstLetter = null;
         LocalDate today = LocalDate.now(), minBirthDate = LocalDate.of(1940, 01, 01),
                 minMoveInDate = LocalDate.of(2010, 01, 01);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("YYYY/MM/DD");
 
         if (!staffs.isEmpty()) {
             //vòng lặp xác nhận thông tin nhập trước khi đồng bộ
@@ -116,15 +118,15 @@ public class AnimalControl {
                         if (!PatternFormat.datePattern(tempBirthDate)) {
                             System.out.println("Date format not correct. Kindly re-input.");
                             check = false;
-                        } else if (LocalDate.parse(tempBirthDate).getYear() < minBirthDate.getYear()) {
+                        } else if (LocalDate.parse(tempBirthDate,dateTimeFormatter).getYear() < minBirthDate.getYear()) {
                             System.out.println("Date so early. only after 1940s.");
                             check = false;
-                        } else if (LocalDate.parse(tempBirthDate).getYear() > today.getYear()) {
+                        } else if (LocalDate.parse(tempBirthDate,dateTimeFormatter).getYear() > today.getYear()) {
                             System.out.println("Date so late than today.");
                             check = false;
                         } else check = true;
                     } while (!check);
-                    zooAnimal.setBirthDate(LocalDate.parse(tempBirthDate));
+                    zooAnimal.setBirthDate(LocalDate.parse(tempBirthDate,dateTimeFormatter));
 
                     // input move in date
                     do {
@@ -133,15 +135,15 @@ public class AnimalControl {
                         if (!PatternFormat.datePattern(tempMoveInDate)) {
                             System.out.println("Date format not correct. Kindly re-input.");
                             check = false;
-                        } else if (LocalDate.parse(tempMoveInDate).getYear() < minMoveInDate.getYear()) {
+                        } else if (LocalDate.parse(tempMoveInDate,dateTimeFormatter).getYear() < minMoveInDate.getYear()) {
                             System.out.println("Date so early. only after 2010s.");
                             check = false;
-                        } else if (LocalDate.parse(tempMoveInDate).getYear() > today.getYear()) {
+                        } else if (LocalDate.parse(tempMoveInDate,dateTimeFormatter).getYear() > today.getYear()) {
                             System.out.println("Date so late than today");
                             check = false;
                         } else check = true;
                     } while (!check);
-                    zooAnimal.setMoveInDate(LocalDate.parse(tempMoveInDate));
+                    zooAnimal.setMoveInDate(LocalDate.parse(tempMoveInDate,dateTimeFormatter));
 
                     // input origin
                     System.out.println("Input origin of animal number " + (i + 1) + " from:");
@@ -247,6 +249,7 @@ public class AnimalControl {
         ZooAnimal updateAnimal = null;
         LocalDate today = LocalDate.now(), minBirthDate = LocalDate.of(1940, 01, 01),
                 minMoveInDate = LocalDate.of(2010, 01, 01);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("YYYY/MM/DD");
 
         do {
             System.out.println("Input Animal ID need update: ");
@@ -291,15 +294,15 @@ public class AnimalControl {
                                 if (!PatternFormat.datePattern(tempBirthDate)) {
                                     System.out.println("Date format not correct. Kindly re-input.");
                                     check = false;
-                                } else if (LocalDate.parse(tempBirthDate).getYear() < minBirthDate.getYear()) {
+                                } else if (LocalDate.parse(tempBirthDate,dateTimeFormatter).getYear() < minBirthDate.getYear()) {
                                     System.out.println("Date so early. only after 1940s.");
                                     check = false;
-                                } else if (LocalDate.parse(tempBirthDate).getYear() > today.getYear()) {
+                                } else if (LocalDate.parse(tempBirthDate,dateTimeFormatter).getYear() > today.getYear()) {
                                     System.out.println("Date so late than today.");
                                     check = false;
                                 } else check = true;
                             } while (!check);
-                            updateAnimal.setBirthDate(LocalDate.parse(tempBirthDate));
+                            updateAnimal.setBirthDate(LocalDate.parse(tempBirthDate,dateTimeFormatter));
                             break;
                         case 3:
                             do {
@@ -323,15 +326,15 @@ public class AnimalControl {
                                 if (!PatternFormat.datePattern(tempMoveIn)) {
                                     System.out.println("Date format not correct. Kindly re-input.");
                                     check = false;
-                                } else if (LocalDate.parse(tempMoveIn).getYear() < minMoveInDate.getYear()) {
+                                } else if (LocalDate.parse(tempMoveIn,dateTimeFormatter).getYear() < minMoveInDate.getYear()) {
                                     System.out.println("Date so early. only after 2010s.");
                                     check = false;
-                                } else if (LocalDate.parse(tempMoveIn).getYear() > today.getYear()) {
+                                } else if (LocalDate.parse(tempMoveIn,dateTimeFormatter).getYear() > today.getYear()) {
                                     System.out.println("Date so late than today");
                                     check = false;
                                 } else check = true;
                             } while (!check);
-                            updateAnimal.setMoveInDate(LocalDate.parse(tempMoveIn));
+                            updateAnimal.setMoveInDate(LocalDate.parse(tempMoveIn,dateTimeFormatter));
                             break;
                         case 6:
                             List<ZooStaff> staffs = StaffFile.readStaffFromFile();
