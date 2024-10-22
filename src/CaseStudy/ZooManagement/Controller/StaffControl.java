@@ -7,6 +7,7 @@ import CaseStudy.ZooManagement.Support.checkDataIsExist;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 public class StaffControl {
@@ -18,9 +19,9 @@ public class StaffControl {
         ZooStaff[] staffTempList;
         boolean continueAdding = true, check = true;
         String confirm, tempID, tempGender, tempBirthDate, tempNumber, tempEmail, tempHireDate;
-        LocalDate today = LocalDate.now(), minBirthDate = LocalDate.of(1940, 01, 01),
-                minHireDate = LocalDate.of(2010, 01, 01);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("YYYY/MM/DD");
+        LocalDate today = LocalDate.now(), minBirthDate = LocalDate.of(1940, 1, 1),
+                minHireDate = LocalDate.of(2010, 1, 1);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
         //vòng lặp xác nhận thông tin nhập trước khi đồng bộ
         do {
@@ -70,21 +71,29 @@ public class StaffControl {
 
                 // input BD
                 do {
-                    System.out.println("Input birth date of staff number " + (i + 1) + ": (YYYY/MM/DD)");
+                    System.out.println("Input birth date of staff number " + (i + 1) + ": (yyyy/MM/dd)");
                     tempBirthDate = scanner.nextLine();
-                    if (!PatternFormat.datePattern(tempBirthDate)) {
+                    try {
+                        LocalDate parsedDate = LocalDate.parse(tempBirthDate, dateTimeFormatter);
+
+                        if (parsedDate.isBefore(minBirthDate)) {
+                            System.out.println("Date is too early. Only after 1940.");
+                            check = false;
+                        } else if (parsedDate.isAfter(today)) {
+                            System.out.println("Date cannot be later than today.");
+                            check = false;
+                        } else if (today.getYear() - parsedDate.getYear() < 18) {
+                            System.out.println("Staff must be at least 18 years old.");
+                            check = false;
+                        } else {
+                            check = true;
+                        }
+                    } catch (DateTimeParseException e) {
                         System.out.println("Date format not correct. Kindly re-input.");
                         check = false;
-                    } else if (LocalDate.parse(tempBirthDate,dateTimeFormatter).getYear() < minBirthDate.getYear()) {
-                        System.out.println("Date so early. only after 1940s.");
-                        check = false;
-                    } else if (LocalDate.parse(tempBirthDate,dateTimeFormatter).getYear() > today.getYear() ||
-                            (today.getYear() - LocalDate.parse(tempBirthDate,dateTimeFormatter).getYear()) < 18) {
-                        System.out.println("Date so late than today or not enough 18.");
-                        check = false;
-                    } else check = true;
+                    }
                 } while (!check);
-                zooStaff.setBirthDate(LocalDate.parse(tempBirthDate,dateTimeFormatter));
+                zooStaff.setBirthDate(LocalDate.parse(tempBirthDate, dateTimeFormatter));
 
                 // input address
                 System.out.println("Input address of staff number " + (i + 1) + ":");
@@ -94,18 +103,24 @@ public class StaffControl {
                 do {
                     System.out.println("Input hire date of staff number " + (i + 1) + ": (YYYY/MM/DD)");
                     tempHireDate = scanner.nextLine();
-                    if (!PatternFormat.datePattern(tempHireDate)) {
+                    try {
+                        LocalDate parsedDate = LocalDate.parse(tempHireDate, dateTimeFormatter);
+
+                        if (parsedDate.isBefore(minHireDate)) {
+                            System.out.println("Date is too early. Only after 2010.");
+                            check = false;
+                        } else if (parsedDate.isAfter(today)) {
+                            System.out.println("Date cannot be later than today.");
+                            check = false;
+                        } else {
+                            check = true;
+                        }
+                    } catch (DateTimeParseException e) {
                         System.out.println("Date format not correct. Kindly re-input.");
                         check = false;
-                    } else if (LocalDate.parse(tempHireDate,dateTimeFormatter).getYear() < minHireDate.getYear()) {
-                        System.out.println("Date so early. only after 2010s.");
-                        check = false;
-                    } else if (LocalDate.parse(tempHireDate,dateTimeFormatter).getYear() > today.getYear()) {
-                        System.out.println("Date so late than today");
-                        check = false;
-                    } else check = true;
+                    }
                 } while (!check);
-                zooStaff.setHireDate(LocalDate.parse(tempHireDate,dateTimeFormatter));
+                zooStaff.setHireDate(LocalDate.parse(tempHireDate, dateTimeFormatter));
 
                 // input position
                 System.out.println("Input position of staff number " + (i + 1) + ":");
@@ -214,9 +229,9 @@ public class StaffControl {
         int option, index = 0;
         boolean check = true, continueEditing = true;
         ZooStaff updateStaff = null;
-        LocalDate today = LocalDate.now(), minBirthDate = LocalDate.of(1940, 01, 01),
-                minHireDate = LocalDate.of(2010, 01, 01);
-        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("YYYY/MM/DD");
+        LocalDate today = LocalDate.now(), minBirthDate = LocalDate.of(1940, 1, 1),
+                minHireDate = LocalDate.of(2010, 1, 1);
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
         do {
             if (!staffList.isEmpty()) {
@@ -261,19 +276,27 @@ public class StaffControl {
                             do {
                                 System.out.println("Input new BD of " + updateStaff.getID());
                                 tempBirthDate = scanner.nextLine();
-                                if (!PatternFormat.datePattern(tempBirthDate)) {
+                                try {
+                                    LocalDate parsedDate = LocalDate.parse(tempBirthDate, dateTimeFormatter);
+
+                                    if (parsedDate.isBefore(minBirthDate)) {
+                                        System.out.println("Date is too early. Only after 1940.");
+                                        check = false;
+                                    } else if (parsedDate.isAfter(today)) {
+                                        System.out.println("Date cannot be later than today.");
+                                        check = false;
+                                    } else if (today.getYear() - parsedDate.getYear() < 18) {
+                                        System.out.println("Staff must be at least 18 years old.");
+                                        check = false;
+                                    } else {
+                                        check = true;
+                                    }
+                                } catch (DateTimeParseException e) {
                                     System.out.println("Date format not correct. Kindly re-input.");
                                     check = false;
-                                } else if (LocalDate.parse(tempBirthDate,dateTimeFormatter).getYear() < minBirthDate.getYear()) {
-                                    System.out.println("Date so early. only after 1940s.");
-                                    check = false;
-                                } else if (LocalDate.parse(tempBirthDate,dateTimeFormatter).getYear() > today.getYear() ||
-                                        (today.getYear() - LocalDate.parse(tempBirthDate,dateTimeFormatter).getYear()) < 18) {
-                                    System.out.println("Date so late than today or not enough 18.");
-                                    check = false;
-                                } else check = true;
+                                }
                             } while (!check);
-                            updateStaff.setBirthDate(LocalDate.parse(tempBirthDate,dateTimeFormatter));
+                            updateStaff.setBirthDate(LocalDate.parse(tempBirthDate, dateTimeFormatter));
                             break;
                         case 3:
                             do {
@@ -298,18 +321,24 @@ public class StaffControl {
                             do {
                                 System.out.println("Input new hire date of " + updateStaff.getID());
                                 tempHireDate = scanner.nextLine();
-                                if (!PatternFormat.datePattern(tempHireDate)) {
+                                try {
+                                    LocalDate parsedDate = LocalDate.parse(tempHireDate, dateTimeFormatter);
+
+                                    if (parsedDate.isBefore(minHireDate)) {
+                                        System.out.println("Date is too early. Only after 2010.");
+                                        check = false;
+                                    } else if (parsedDate.isAfter(today)) {
+                                        System.out.println("Date cannot be later than today.");
+                                        check = false;
+                                    } else {
+                                        check = true;
+                                    }
+                                } catch (DateTimeParseException e) {
                                     System.out.println("Date format not correct. Kindly re-input.");
                                     check = false;
-                                } else if (LocalDate.parse(tempHireDate,dateTimeFormatter).getYear() < minHireDate.getYear()) {
-                                    System.out.println("Date so early. only after 2010s.");
-                                    check = false;
-                                } else if (LocalDate.parse(tempHireDate,dateTimeFormatter).getYear() > today.getYear()) {
-                                    System.out.println("Date so late than today");
-                                    check = false;
-                                } else check = true;
+                                }
                             } while (!check);
-                            updateStaff.setHireDate(LocalDate.parse(tempHireDate,dateTimeFormatter));
+                            updateStaff.setHireDate(LocalDate.parse(tempHireDate, dateTimeFormatter));
                             break;
                         case 7:
                             System.out.println("Input new salary of " + updateStaff.getID());
