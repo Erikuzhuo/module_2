@@ -18,7 +18,7 @@ public class StaffControl {
         List<ZooStaff> staffList = StaffFile.readStaffFromFile();
         ZooStaff[] staffTempList;
         boolean continueAdding = true, check = true;
-        String confirm, tempID, tempGender, tempBirthDate, tempNumber, tempEmail, tempHireDate, tempInCharge;
+        String confirm, tempID, tempGender, tempBirthDate, tempNumber, tempEmail, tempHireDate;
         String firstLetter = null;
         LocalDate today = LocalDate.now();
 
@@ -39,7 +39,6 @@ public class StaffControl {
                     System.out.println("Input ID of Staff number " + (i + 1) + ":\n" +
                             "(letter Z + 5 digit numbers or letters.)");
                     tempID = scanner.nextLine();
-                    tempID = firstLetter + tempID;
                     if (!PatternFormat.staffID(tempID)) {
                         System.out.println("Invalid input. Kindly re-input.");
                         check = false;
@@ -148,14 +147,16 @@ public class StaffControl {
         }
     }
 
-    public static String displayStaffList() {
+    public static void displayStaffList() {
         List<ZooStaff> list = StaffFile.readStaffFromFile();
-        return list.toString();
+        for(ZooStaff staff:list){
+            System.out.println(staff.toString());
+        }
     }
 
     public static void deleteStaff() {
         List<ZooStaff> staffList = StaffFile.readStaffFromFile();
-        String confirm = "", tempID;
+        String confirm, tempID;
         ZooStaff deleteStaff = null;
 
         do {
@@ -191,7 +192,7 @@ public class StaffControl {
 
     public static void updateAnimalList() {
         List<ZooStaff> staffList = StaffFile.readStaffFromFile();
-        String confirm = "", checkID, tempBirthDate, tempGender, tempEmail, tempNumber;
+        String confirm, checkID, tempBirthDate, tempGender, tempEmail, tempNumber;
         int option, index = 0;
         boolean check = true, continueEditing = true;
         ZooStaff updateStaff = null;
@@ -323,7 +324,6 @@ public class StaffControl {
                 if (!continueEditing) break;
                 else {
                     System.out.println("Update completed. Do you want update other staff? (Y/N)");
-                    confirm = "";
                     confirm = scanner.nextLine();
                 }
             } else {

@@ -61,7 +61,7 @@ public class ZooManagement {
                             AnimalControl.deleteAnimal();
                             break;
                         case 4:
-                            AnimalControl.deleteAnimal();
+                            AnimalControl.displayAnimalList();
                             break;
                         case 5:
                             System.exit(0);

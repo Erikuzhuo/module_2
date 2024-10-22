@@ -183,9 +183,11 @@ public class AnimalControl {
         } else System.out.println("Kindly input staff information first.");
     }
 
-    public static String displayAnimalList() {
+    public static void displayAnimalList() {
         List<ZooAnimal> list = AnimalFile.readAnimalFromFile();
-        return list.toString();
+        for(ZooAnimal animal:list){
+            System.out.println(animal.toString());
+        }
     }
 
     public static void deleteAnimal() {
