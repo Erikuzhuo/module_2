@@ -149,8 +149,17 @@ public class StaffControl {
                 zooStaff.setEmail(tempEmail);
 
                 // input salary
-                System.out.println("Input salary of staff number " + (i + 1) + ":");
-                zooStaff.setSalary(Double.parseDouble(scanner.nextLine()));
+                do {
+                    System.out.println("Input salary of staff number " + (i + 1) + ":");
+
+                    try {
+                        zooStaff.setSalary(Double.parseDouble(scanner.nextLine()));
+                        check = true;
+                    } catch (NumberFormatException e) {
+                        System.out.println("Number format not correct. pls try again.");
+                        check = false;
+                    }
+                } while (!check);
 
                 // input note
                 System.out.println("Input note of staff number " + (i + 1) + ":");
@@ -342,7 +351,15 @@ public class StaffControl {
                             break;
                         case 7:
                             System.out.println("Input new salary of " + updateStaff.getID());
-                            updateStaff.setSalary(Double.parseDouble(scanner.nextLine()));
+                            do {
+                                try {
+                                    updateStaff.setSalary(Double.parseDouble(scanner.nextLine()));
+                                    check = true;
+                                } catch (NumberFormatException e) {
+                                    System.out.println("Number format not correct. pls try again.");
+                                    check = false;
+                                }
+                            } while (!check);
                             break;
                         case 8:
                             do {
