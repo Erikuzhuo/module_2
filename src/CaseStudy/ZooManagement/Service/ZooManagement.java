@@ -6,7 +6,7 @@ public class ZooManagement {
     public static void main(String[] args) {
         while (true) {
             Scanner scanner = new Scanner(System.in);
-            System.out.println("Kindly choice your option number:\n " +
+            System.out.println("Kindly choice your option number:\n" +
                     "1. Staff Management.\n" +
                     "2. Animal Management.\n" +
                     "3. Exit. ");

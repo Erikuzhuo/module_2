@@ -2,18 +2,18 @@ package CaseStudy.ZooManagement.Model.Class;
 
 import java.time.LocalDate;
 
-public class Admin extends Animal {
+public class ZooStaff extends Animal {
     private String address, position, email, note;
     private String phoneNumber;
     private double salary;
     private LocalDate hireDate;
 
-    public Admin(String ID) {
+    public ZooStaff() {
     }
 
-    public Admin(String ID, String name, String gender, LocalDate birthDate,
-                 LocalDate hireDate, String position, double salary,
-                 String email, String phoneNumber, String address, String note) {
+    public ZooStaff(String ID, String name, String gender, LocalDate birthDate,
+                    LocalDate hireDate, String position, double salary,
+                    String email, String phoneNumber, String address, String note) {
         super(ID, name, gender, birthDate);
         this.address = address;
         this.position = position;

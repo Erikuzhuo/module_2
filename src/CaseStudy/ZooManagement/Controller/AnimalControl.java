@@ -15,13 +15,13 @@ public class AnimalControl {
     public static void createAninmal() {
         Scanner scanner = new Scanner(System.in);
         List<ZooAnimal> animalList = AnimalFile.readAnimalFromFile();
-        List<Admin> staffs = StaffFile.readStaffFromFile();
+        List<ZooStaff> staffs = StaffFile.readStaffFromFile();
         ZooAnimal[] animalTempList;
         boolean continueAdding = true, check = true;
         String confirm, tempID, tempGender, tempBirthDate, tempMoveInDate, tempInCharge;
         int choiceOption;
         String firstLetter = null;
-        LocalDate today = LocalDate.now();
+        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.parse("1940/01/01"),minMoveInDate=LocalDate.parse("2010/01/01");
 
         if (!staffs.isEmpty()) {
             //vòng lặp xác nhận thông tin nhập trước khi đồng bộ
@@ -120,6 +120,12 @@ public class AnimalControl {
                         if (!PatternFormat.datePattern(tempBirthDate)) {
                             System.out.println("Date format not correct. Kindly re-input.");
                             check = false;
+                        }else if(LocalDate.parse(tempBirthDate).getYear()<minBirthDate.getYear()){
+                            System.out.println("Date so early. only after 1940s.");
+                            check=false;
+                        }else if(LocalDate.parse(tempBirthDate).getYear()>today.getYear() ) {
+                            System.out.println("Date so late than today.");
+                            check = false;
                         }
                     } while (!check);
                     animalTempList[i].setBirthDate(LocalDate.parse(tempBirthDate));
@@ -130,6 +136,12 @@ public class AnimalControl {
                         tempMoveInDate = scanner.nextLine();
                         if (!PatternFormat.datePattern(tempMoveInDate)) {
                             System.out.println("Date format not correct. Kindly re-input.");
+                            check = false;
+                        }else if(LocalDate.parse(tempMoveInDate).getYear()<minMoveInDate.getYear()) {
+                            System.out.println("Date so early. only after 2010s.");
+                            check = false;
+                        }else if(LocalDate.parse(tempMoveInDate).getYear()>today.getYear()) {
+                            System.out.println("Date so late than today");
                             check = false;
                         }
                     } while (!check);
@@ -144,7 +156,7 @@ public class AnimalControl {
                         System.out.println("Input in-charge person: | input 0 if you want to exit.");
                         tempInCharge = scanner.nextLine();
                         if (!Objects.equals(tempInCharge, "0")) {
-                            for (Admin checkStaff : staffs) {
+                            for (ZooStaff checkStaff : staffs) {
                                 if (tempInCharge.isEmpty() || !Objects.equals(checkStaff.getName(), tempInCharge)) {
                                     check = false;
                                     System.out.println("Staff member not exist. Please re-input.");
@@ -235,7 +247,7 @@ public class AnimalControl {
         int option, index = 0;
         boolean check = true, continueEditing = true;
         ZooAnimal updateAnimal = null;
-        LocalDate today = LocalDate.now();
+        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.parse("1940/01/01"),minMoveInDate=LocalDate.parse("2010/01/01");
 
         do {
             System.out.println("Input Animal ID need update: ");
@@ -280,6 +292,12 @@ public class AnimalControl {
                                 if (!PatternFormat.datePattern(tempBirthDate)) {
                                     System.out.println("Date format not correct. Kindly re-input.");
                                     check = false;
+                                }else if(LocalDate.parse(tempBirthDate).getYear()<minBirthDate.getYear()){
+                                    System.out.println("Date so early. only after 1940s.");
+                                    check=false;
+                                }else if(LocalDate.parse(tempBirthDate).getYear()>today.getYear() ) {
+                                    System.out.println("Date so late than today.");
+                                    check = false;
                                 }
                             } while (!check);
                             updateAnimal.setBirthDate(LocalDate.parse(tempBirthDate));
@@ -306,19 +324,25 @@ public class AnimalControl {
                                 if (!PatternFormat.datePattern(tempMoveIn)) {
                                     System.out.println("Date format not correct. Kindly re-input.");
                                     check = false;
+                                }else if(LocalDate.parse(tempMoveIn).getYear()<minMoveInDate.getYear()) {
+                                    System.out.println("Date so early. only after 2010s.");
+                                    check = false;
+                                }else if(LocalDate.parse(tempMoveIn).getYear()>today.getYear()) {
+                                    System.out.println("Date so late than today");
+                                    check = false;
                                 }
                             } while (!check);
                             updateAnimal.setMoveInDate(LocalDate.parse(tempMoveIn));
                             break;
                         case 6:
-                            List<Admin> staffs = StaffFile.readStaffFromFile();
+                            List<ZooStaff> staffs = StaffFile.readStaffFromFile();
                             if (!staffs.isEmpty()) {
                                 do {
                                     System.out.println("Input in-charge person: | input 0 if you want to exit.");
                                     tempInCharge = scanner.nextLine();
                                     if (tempInCharge != "0") {
                                         if (!staffs.isEmpty()) {
-                                            for (Admin checkStaff : staffs) {
+                                            for (ZooStaff checkStaff : staffs) {
                                                 if (tempInCharge.isEmpty() || !Objects.equals(checkStaff.getName(), tempInCharge)) {
                                                     check = false;
                                                     System.out.println("Staff member not exist. Please re-input.");

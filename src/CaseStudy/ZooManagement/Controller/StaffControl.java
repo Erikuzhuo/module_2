@@ -16,12 +16,11 @@ public class StaffControl {
 
     public static void createStaff() {
         Scanner scanner = new Scanner(System.in);
-        List<Admin> staffList = StaffFile.readStaffFromFile();
-        Admin[] staffTempList;
+        List<ZooStaff> staffList = StaffFile.readStaffFromFile();
+        ZooStaff[] staffTempList;
         boolean continueAdding = true, check = true;
         String confirm, tempID, tempGender, tempBirthDate, tempNumber, tempEmail, tempHireDate;
-        String firstLetter = null;
-        LocalDate today = LocalDate.now();
+        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.parse("1940/01/01"),minHireDate=LocalDate.parse("2010/01/01");
 
         //vòng lặp xác nhận thông tin nhập trước khi đồng bộ
         do {
@@ -33,9 +32,10 @@ public class StaffControl {
             }
 
             // vòng lặp nhận thông tin cho từng đối tượng
-            staffTempList = new Admin[newAddNumber];
+            staffTempList = new ZooStaff[newAddNumber];
             for (int i = 0; i < staffTempList.length; i++) {
                 // input ID
+                ZooStaff zooStaff = new ZooStaff();
                 do {
                     System.out.println("Input ID of Staff number " + (i + 1) + ":\n" +
                             "(letter Z + 5 digit numbers or letters.)");
@@ -51,11 +51,11 @@ public class StaffControl {
                         }
                     }
                 } while (!check);
-                staffTempList[i].setID(tempID);
+                zooStaff.setID(tempID);
 
                 // input name
                 System.out.println("Input name of staff number " + (i + 1) + ":");
-                staffTempList[i].setName(scanner.nextLine());
+                zooStaff.setName(scanner.nextLine());
 
                 // input gender
                 do {
@@ -66,7 +66,7 @@ public class StaffControl {
                         System.out.println("Invalid input. Kindly re-input.");
                     }
                 } while (!check);
-                staffTempList[i].setGender(tempGender);
+                zooStaff.setGender(tempGender);
 
                 // input BD
                 do {
@@ -75,13 +75,20 @@ public class StaffControl {
                     if (!PatternFormat.datePattern(tempBirthDate)) {
                         System.out.println("Date format not correct. Kindly re-input.");
                         check = false;
+                    } else if(LocalDate.parse(tempBirthDate).getYear()<minBirthDate.getYear()){
+                        System.out.println("Date so early. only after 1940s.");
+                        check=false;
+                    }else if(LocalDate.parse(tempBirthDate).getYear()>today.getYear() ||
+                            (today.getYear()-LocalDate.parse(tempBirthDate).getYear())<18) {
+                        System.out.println("Date so late than today or not enough 18.");
+                        check = false;
                     }
                 } while (!check);
-                staffTempList[i].setBirthDate(LocalDate.parse(tempBirthDate));
+                zooStaff.setBirthDate(LocalDate.parse(tempBirthDate));
 
                 // input address
                 System.out.println("Input address of staff number " + (i + 1) + ":");
-                staffTempList[i].setAddress(scanner.nextLine());
+                zooStaff.setAddress(scanner.nextLine());
 
                 // input hire date
                 do {
@@ -90,13 +97,19 @@ public class StaffControl {
                     if (!PatternFormat.datePattern(tempHireDate)) {
                         System.out.println("Date format not correct. Kindly re-input.");
                         check = false;
+                    }else if(LocalDate.parse(tempHireDate).getYear()<minHireDate.getYear()) {
+                        System.out.println("Date so early. only after 2010s.");
+                        check = false;
+                    }else if(LocalDate.parse(tempHireDate).getYear()>today.getYear()) {
+                        System.out.println("Date so late than today");
+                        check = false;
                     }
                 } while (!check);
-                staffTempList[i].setHireDate(LocalDate.parse(tempHireDate));
+                zooStaff.setHireDate(LocalDate.parse(tempHireDate));
 
                 // input position
                 System.out.println("Input position of staff number " + (i + 1) + ":");
-                staffTempList[i].setPosition(scanner.nextLine());
+                zooStaff.setPosition(scanner.nextLine());
 
                 // input phone number
                 do {
@@ -107,7 +120,7 @@ public class StaffControl {
                         check = false;
                     }
                 } while (!check);
-                staffTempList[i].setPhoneNumber(tempNumber);
+                zooStaff.setPhoneNumber(tempNumber);
 
                 // input email
                 do {
@@ -118,15 +131,17 @@ public class StaffControl {
                         check = false;
                     }
                 } while (!check);
-                staffTempList[i].setEmail(tempEmail);
+                zooStaff.setEmail(tempEmail);
 
                 // input salary
                 System.out.println("Input salary of staff number " + (i + 1) + ":");
-                staffTempList[i].setSalary(Double.parseDouble(scanner.nextLine()));
+                zooStaff.setSalary(Double.parseDouble(scanner.nextLine()));
 
                 // input note
                 System.out.println("Input note of staff number " + (i + 1) + ":");
-                staffTempList[i].setNote(today + "Created Animal," + scanner.nextLine() + ".");
+                zooStaff.setNote(today + "Created staff," + scanner.nextLine() + ".");
+
+                staffTempList[i]=zooStaff;
             }
             // exit
             if (!continueAdding) break;
@@ -138,7 +153,7 @@ public class StaffControl {
 
         } while (!Objects.equals(confirm, "Y") || !Objects.equals(confirm, "y"));
 
-        // nhập dữ liệ vào file và kết thúc.
+        // nhập dữ liệu vào file và kết thúc.
         if (!continueAdding) {
             System.out.println("Exited and Deleted all editing.");
         } else {
@@ -149,17 +164,17 @@ public class StaffControl {
     }
 
     public static void displayStaffList() {
-        List<Admin> list = StaffFile.readStaffFromFile();
-        for(Admin staff:list){
+        List<ZooStaff> list = StaffFile.readStaffFromFile();
+        for(ZooStaff staff:list){
             System.out.println(staff.toString());
         }
     }
 
     public static void deleteStaff() {
         Scanner scanner = new Scanner(System.in);
-        List<Admin> staffList = StaffFile.readStaffFromFile();
+        List<ZooStaff> staffList = StaffFile.readStaffFromFile();
         String confirm, tempID;
-        Admin deleteStaff = null;
+        ZooStaff deleteStaff = null;
 
         do {
             System.out.println("Input staff ID: ");
@@ -171,7 +186,7 @@ public class StaffControl {
             }
             if (tempID.equals("0")) break;
 
-            for (Admin Staff : staffList) {
+            for (ZooStaff Staff : staffList) {
                 if (Objects.equals(Staff.getID(), tempID)) {
                     deleteStaff = Staff;
                     break;
@@ -194,12 +209,12 @@ public class StaffControl {
 
     public static void updateStaffList() {
         Scanner scanner = new Scanner(System.in);
-        List<Admin> staffList = StaffFile.readStaffFromFile();
-        String confirm, checkID, tempBirthDate, tempGender, tempEmail, tempNumber;
+        List<ZooStaff> staffList = StaffFile.readStaffFromFile();
+        String confirm, checkID, tempBirthDate, tempGender, tempEmail, tempNumber,tempHireDate;
         int option, index = 0;
         boolean check = true, continueEditing = true;
-        Admin updateStaff = null;
-        LocalDate today = LocalDate.now();
+        ZooStaff updateStaff = null;
+        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.parse("1940/01/01"),minHireDate=LocalDate.parse("2010/01/01");
 
         do {
             if (!staffList.isEmpty()) {
@@ -212,7 +227,7 @@ public class StaffControl {
                 }
                 if (checkID.equals("0")) break;
 
-                for (Admin staff : staffList) {
+                for (ZooStaff staff : staffList) {
                     if (Objects.equals(staff.getID(), checkID)) {
                         updateStaff = staff;
                         index = staffList.indexOf(staff);
@@ -247,6 +262,13 @@ public class StaffControl {
                                 if (!PatternFormat.datePattern(tempBirthDate)) {
                                     System.out.println("Date format not correct. Kindly re-input.");
                                     check = false;
+                                }else if(LocalDate.parse(tempBirthDate).getYear()<minBirthDate.getYear()){
+                                    System.out.println("Date so early. only after 1940s.");
+                                    check=false;
+                                }else if(LocalDate.parse(tempBirthDate).getYear()>today.getYear() ||
+                                        (today.getYear()-LocalDate.parse(tempBirthDate).getYear())<18) {
+                                    System.out.println("Date so late than today or not enough 18.");
+                                    check = false;
                                 }
                             } while (!check);
                             updateStaff.setBirthDate(LocalDate.parse(tempBirthDate));
@@ -273,13 +295,19 @@ public class StaffControl {
                         case 6:
                             do {
                                 System.out.println("Input new hire date of " + updateStaff.getID());
-                                tempEmail = scanner.nextLine();
-                                if (!PatternFormat.datePattern(tempEmail)) {
+                                tempHireDate = scanner.nextLine();
+                                if (!PatternFormat.datePattern(tempHireDate)) {
                                     System.out.println("Date format not correct. Kindly re-input.");
+                                    check = false;
+                                }else if(LocalDate.parse(tempHireDate).getYear()<minHireDate.getYear()) {
+                                    System.out.println("Date so early. only after 2010s.");
+                                    check = false;
+                                }else if(LocalDate.parse(tempHireDate).getYear()>today.getYear()) {
+                                    System.out.println("Date so late than today");
                                     check = false;
                                 }
                             } while (!check);
-                            updateStaff.setHireDate(LocalDate.parse(tempEmail));
+                            updateStaff.setHireDate(LocalDate.parse(tempHireDate));
                             break;
                         case 7:
                             System.out.println("Input new salary of " + updateStaff.getID());
