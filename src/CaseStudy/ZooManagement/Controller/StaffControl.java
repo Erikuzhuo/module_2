@@ -221,17 +221,17 @@ public class StaffControl {
                 }
 
                 do {
-                    System.out.println("What's information number you want to update: " +
-                            "1. Name." +
-                            "2. Birthday." +
-                            "3. Gender." +
-                            "4. address." +
-                            "5. Position." +
-                            "6. Hire Date." +
-                            "7. Salary." +
-                            "8. Phone Number." +
-                            "9. Email. " +
-                            "10. note. " +
+                    System.out.println("What's information number you want to update: \n" +
+                            "1. Name.\n" +
+                            "2. Birthday.\n" +
+                            "3. Gender.\n" +
+                            "4. address.\n" +
+                            "5. Position.\n" +
+                            "6. Hire Date.\n" +
+                            "7. Salary.\n" +
+                            "8. Phone Number.\n" +
+                            "9. Email.\n " +
+                            "10. note.\n " +
                             "11. exit.");
 
                     option = Integer.parseInt(scanner.nextLine());

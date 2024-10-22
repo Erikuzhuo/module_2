@@ -7,11 +7,11 @@ import java.util.Scanner;
 public class StaffManagement {
     public static void staffControl() {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Choice your option number: " +
-                "1. Create Staff Information." +
-                "2. Update Staff Information." +
-                "3. Delete Staff Information." +
-                "4. Display Staff Data." +
+        System.out.println("Choice your option number: \n" +
+                "1. Create Staff Information.\n" +
+                "2. Update Staff Information.\n" +
+                "3. Delete Staff Information.\n" +
+                "4. Display Staff Data.\n" +
                 "5. Exit.");
         int staffOption = scanner.nextInt();
         switch (staffOption) {
@@ -29,6 +29,9 @@ public class StaffManagement {
                 break;
             case 5:
                 System.exit(0);
+            default:
+                System.out.println("Your option does not exist.");
+                break;
         }
     }
 }

@@ -38,11 +38,11 @@ public class AnimalControl {
                 for (int i = 0; i < animalTempList.length; i++) {
                     // Phân Loại Động Vật
                     do {
-                        System.out.println("What is the animal kind number: " +
-                                "1. Elephant." +
-                                "2. Monkey." +
-                                "3. Owl." +
-                                "4. Tiger." +
+                        System.out.println("What is the animal kind number: \n" +
+                                "1. Elephant.\n" +
+                                "2. Monkey.\n" +
+                                "3. Owl.\n" +
+                                "4. Tiger.\n" +
                                 "5. Exit.");
                         choiceOption = Integer.parseInt(scanner.nextLine());
                         switch (choiceOption) {
@@ -257,14 +257,14 @@ public class AnimalControl {
                 }
 
                 do {
-                    System.out.println("What's information number you want to update: " +
-                            "1. Name." +
-                            "2. Birthday." +
-                            "3. Gender." +
-                            "4. Origin place." +
-                            "5. Move in date." +
-                            "6. In-charge person." +
-                            "7. note. " +
+                    System.out.println("What's information number you want to update: \n" +
+                            "1. Name.\n" +
+                            "2. Birthday.\n" +
+                            "3. Gender.\n" +
+                            "4. Origin place.\n" +
+                            "5. Move in date.\n" +
+                            "6. In-charge person.\n" +
+                            "7. note. \n" +
                             "8. exit.");
 
                     option = Integer.parseInt(scanner.nextLine());

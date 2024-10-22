@@ -30,6 +30,9 @@ public class AnimalManagement {
             case 5:
                 System.exit(0);
                 break;
+            default:
+                System.out.println("your option does not exist.");
+                break;
         }
     }
 }
