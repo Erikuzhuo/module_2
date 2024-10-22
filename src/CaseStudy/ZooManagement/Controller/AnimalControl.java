@@ -21,7 +21,8 @@ public class AnimalControl {
         String confirm, tempID, tempGender, tempBirthDate, tempMoveInDate, tempInCharge;
         int choiceOption;
         String firstLetter = null;
-        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.of(1940,01,01),minMoveInDate=LocalDate.of(2010,01,01);
+        LocalDate today = LocalDate.now(), minBirthDate = LocalDate.of(1940, 01, 01),
+                minMoveInDate = LocalDate.of(2010, 01, 01);
 
         if (!staffs.isEmpty()) {
             //vòng lặp xác nhận thông tin nhập trước khi đồng bộ
@@ -38,42 +39,38 @@ public class AnimalControl {
                 for (int i = 0; i < animalTempList.length; i++) {
                     ZooAnimal zooAnimal = null;
                     // Phân Loại Động Vật
-                    do {
-                        System.out.println("What is the animal kind number: \n" +
-                                "1. Elephant.\n" +
-                                "2. Monkey.\n" +
-                                "3. Owl.\n" +
-                                "4. Tiger.\n" +
-                                "5. Exit.");
-                        choiceOption = Integer.parseInt(scanner.nextLine());
-                        switch (choiceOption) {
-                            case 1:
-                                zooAnimal = new Elephant();
-                                firstLetter = "E";
-                                break;
-                            case 2:
-                                zooAnimal = new Monkey();
-                                firstLetter = "M";
-                                break;
-                            case 3:
-                                zooAnimal = new Owl();
-                                firstLetter = "O";
-                                break;
-                            case 4:
-                                zooAnimal = new Tiger();
-                                firstLetter = "T";
-                                break;
-                            case 5:
-                                continueAdding = false;
-                                break;
-                            default:
-                                System.out.println("Invalid choice. Please try again.");
-                                check = false;
-                                break;
-                        }
-                    } while (!check);
-
-                    // exit
+                    System.out.println("What is the animal kind number: \n" +
+                            "1. Elephant.\n" +
+                            "2. Monkey.\n" +
+                            "3. Owl.\n" +
+                            "4. Tiger.\n" +
+                            "5. Exit.");
+                    choiceOption = Integer.parseInt(scanner.nextLine());
+                    switch (choiceOption) {
+                        case 1:
+                            zooAnimal = new Elephant();
+                            firstLetter = "E";
+                            break;
+                        case 2:
+                            zooAnimal = new Monkey();
+                            firstLetter = "M";
+                            break;
+                        case 3:
+                            zooAnimal = new Owl();
+                            firstLetter = "O";
+                            break;
+                        case 4:
+                            zooAnimal = new Tiger();
+                            firstLetter = "T";
+                            break;
+                        case 5:
+                            continueAdding = false;
+                            break;
+                        default:
+                            System.out.println("Invalid choice. Please try again.");
+                            check = false;
+                            break;
+                    }
                     if (!continueAdding) {
                         break;
                     }
@@ -93,9 +90,7 @@ public class AnimalControl {
                                 System.out.println("ID already exist. Kindly re-input.");
                                 check = false;
                             }
-                        }
-
-
+                        } else check = true;
                     } while (!check);
                     zooAnimal.setID(tempID);
 
@@ -110,7 +105,7 @@ public class AnimalControl {
                         if (!tempGender.equals("M") && !tempGender.equals("F")) {
                             check = false;
                             System.out.println("Invalid input. Kindly re-input.");
-                        }
+                        } else check = true;
                     } while (!check);
                     zooAnimal.setGender(tempGender);
 
@@ -121,13 +116,13 @@ public class AnimalControl {
                         if (!PatternFormat.datePattern(tempBirthDate)) {
                             System.out.println("Date format not correct. Kindly re-input.");
                             check = false;
-                        }else if(LocalDate.parse(tempBirthDate).getYear()<minBirthDate.getYear()){
+                        } else if (LocalDate.parse(tempBirthDate).getYear() < minBirthDate.getYear()) {
                             System.out.println("Date so early. only after 1940s.");
-                            check=false;
-                        }else if(LocalDate.parse(tempBirthDate).getYear()>today.getYear() ) {
+                            check = false;
+                        } else if (LocalDate.parse(tempBirthDate).getYear() > today.getYear()) {
                             System.out.println("Date so late than today.");
                             check = false;
-                        }
+                        } else check = true;
                     } while (!check);
                     zooAnimal.setBirthDate(LocalDate.parse(tempBirthDate));
 
@@ -138,13 +133,13 @@ public class AnimalControl {
                         if (!PatternFormat.datePattern(tempMoveInDate)) {
                             System.out.println("Date format not correct. Kindly re-input.");
                             check = false;
-                        }else if(LocalDate.parse(tempMoveInDate).getYear()<minMoveInDate.getYear()) {
+                        } else if (LocalDate.parse(tempMoveInDate).getYear() < minMoveInDate.getYear()) {
                             System.out.println("Date so early. only after 2010s.");
                             check = false;
-                        }else if(LocalDate.parse(tempMoveInDate).getYear()>today.getYear()) {
+                        } else if (LocalDate.parse(tempMoveInDate).getYear() > today.getYear()) {
                             System.out.println("Date so late than today");
                             check = false;
-                        }
+                        } else check = true;
                     } while (!check);
                     zooAnimal.setMoveInDate(LocalDate.parse(tempMoveInDate));
 
@@ -161,7 +156,7 @@ public class AnimalControl {
                                 if (tempInCharge.isEmpty() || !Objects.equals(checkStaff.getName(), tempInCharge)) {
                                     check = false;
                                     System.out.println("Staff member not exist. Please re-input.");
-                                }
+                                } else check = true;
                             }
                         } else {
                             continueAdding = false;
@@ -201,7 +196,7 @@ public class AnimalControl {
 
     public static void displayAnimalList() {
         List<ZooAnimal> list = AnimalFile.readAnimalFromFile();
-        for(ZooAnimal animal:list){
+        for (ZooAnimal animal : list) {
             System.out.println(animal.toString());
         }
     }
@@ -250,7 +245,8 @@ public class AnimalControl {
         int option, index = 0;
         boolean check = true, continueEditing = true;
         ZooAnimal updateAnimal = null;
-        LocalDate today = LocalDate.now(), minBirthDate= LocalDate.of(1940,01,01),minMoveInDate=LocalDate.of(2010,01,01);
+        LocalDate today = LocalDate.now(), minBirthDate = LocalDate.of(1940, 01, 01),
+                minMoveInDate = LocalDate.of(2010, 01, 01);
 
         do {
             System.out.println("Input Animal ID need update: ");
@@ -295,13 +291,13 @@ public class AnimalControl {
                                 if (!PatternFormat.datePattern(tempBirthDate)) {
                                     System.out.println("Date format not correct. Kindly re-input.");
                                     check = false;
-                                }else if(LocalDate.parse(tempBirthDate).getYear()<minBirthDate.getYear()){
+                                } else if (LocalDate.parse(tempBirthDate).getYear() < minBirthDate.getYear()) {
                                     System.out.println("Date so early. only after 1940s.");
-                                    check=false;
-                                }else if(LocalDate.parse(tempBirthDate).getYear()>today.getYear() ) {
+                                    check = false;
+                                } else if (LocalDate.parse(tempBirthDate).getYear() > today.getYear()) {
                                     System.out.println("Date so late than today.");
                                     check = false;
-                                }
+                                } else check = true;
                             } while (!check);
                             updateAnimal.setBirthDate(LocalDate.parse(tempBirthDate));
                             break;
@@ -312,7 +308,7 @@ public class AnimalControl {
                                 if (!tempGender.equals("M") && !tempGender.equals("F")) {
                                     check = false;
                                     System.out.println("Invalid input. Kindly re-input.");
-                                }
+                                } else check = true;
                             } while (!check);
                             updateAnimal.setGender(tempGender);
                             break;
@@ -327,13 +323,13 @@ public class AnimalControl {
                                 if (!PatternFormat.datePattern(tempMoveIn)) {
                                     System.out.println("Date format not correct. Kindly re-input.");
                                     check = false;
-                                }else if(LocalDate.parse(tempMoveIn).getYear()<minMoveInDate.getYear()) {
+                                } else if (LocalDate.parse(tempMoveIn).getYear() < minMoveInDate.getYear()) {
                                     System.out.println("Date so early. only after 2010s.");
                                     check = false;
-                                }else if(LocalDate.parse(tempMoveIn).getYear()>today.getYear()) {
+                                } else if (LocalDate.parse(tempMoveIn).getYear() > today.getYear()) {
                                     System.out.println("Date so late than today");
                                     check = false;
-                                }
+                                } else check = true;
                             } while (!check);
                             updateAnimal.setMoveInDate(LocalDate.parse(tempMoveIn));
                             break;
@@ -346,10 +342,11 @@ public class AnimalControl {
                                     if (!tempInCharge.equals("0")) {
                                         if (!staffs.isEmpty()) {
                                             for (ZooStaff checkStaff : staffs) {
-                                                if (tempInCharge.isEmpty() || !Objects.equals(checkStaff.getName(), tempInCharge)) {
+                                                if (tempInCharge.isEmpty() || !Objects.equals(checkStaff.getName(),
+                                                        tempInCharge)) {
                                                     check = false;
                                                     System.out.println("Staff member not exist. Please re-input.");
-                                                }
+                                                } else check = true;
                                             }
                                         } else {
                                             continueEditing = false;
@@ -379,8 +376,8 @@ public class AnimalControl {
                     }
                     if (!continueEditing) break;
                     else {
-                        System.out.println("New update as below. Do you still want to update other information? (Y/N)\n" +
-                                updateAnimal.toString());
+                        System.out.println("New update as below. Do you still want to update other information? (Y/N)\n"
+                                + updateAnimal.toString());
                         confirm = scanner.nextLine();
                     }
                 } while (!Objects.equals(confirm, "Y") || !Objects.equals(confirm, "y"));
