@@ -422,7 +422,7 @@ public class AnimalControl {
                 continueEditing = false;
                 break;
             }
-        } while (!confirm.equalsIgnoreCase("Y"));
+        } while (confirm.equalsIgnoreCase("Y"));
         if (!continueEditing) {
             System.out.println("Cancelled Editing.");
         } else {
