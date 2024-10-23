@@ -399,7 +399,7 @@ public class StaffControl {
                                 + updateStaff.toString());
                         confirm = scanner.nextLine();
                     }
-                } while (!confirm.equalsIgnoreCase("Y"));
+                } while (confirm.equalsIgnoreCase("Y"));
 
                 if (!continueEditing) break;
                 else {
