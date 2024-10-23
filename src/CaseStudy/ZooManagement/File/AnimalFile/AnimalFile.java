@@ -47,8 +47,8 @@ public class AnimalFile {
             String name = animalString[1];
             String gender = animalString[2];
             LocalDate birthDate = LocalDate.parse(animalString[3].replace("-","/"),dateTimeFormatter);
-            String originFrom = animalString[5];
-            LocalDate moveInDate = LocalDate.parse(animalString[4].replace("-","/"),dateTimeFormatter);
+            String originFrom = animalString[4];
+            LocalDate moveInDate = LocalDate.parse(animalString[5].replace("-","/"),dateTimeFormatter);
             String inchargeBy = animalString[6];
             String note = animalString[7];
 
