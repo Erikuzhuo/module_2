@@ -163,7 +163,7 @@ public class StaffControl {
 
                 // input note
                 System.out.println("Input note of staff number " + (i + 1) + ":");
-                zooStaff.setNote(today + "Created staff," + scanner.nextLine() + ".");
+                zooStaff.setNote(today + "Created staff + " + scanner.nextLine() + ".");
 
                 staffTempList[i] = zooStaff;
             }
@@ -181,6 +181,7 @@ public class StaffControl {
         if (!continueAdding) {
             System.out.println("Exited and Deleted all editing.");
         } else {
+
             staffList.addAll(Arrays.asList(staffTempList));
             StaffFile.writeStaffToFile(staffList);
             System.out.println("Add on Successfully.");
@@ -385,7 +386,7 @@ public class StaffControl {
                             break;
                         case 10:
                             System.out.println("Input note of " + updateStaff.getID());
-                            updateStaff.setNote(updateStaff.getNote() + today + scanner.nextLine() + ".");
+                            updateStaff.setNote(updateStaff.getNote() + " / " + today + ": " + scanner.nextLine() + ".");
                             break;
                         case 11:
                             continueEditing = false;

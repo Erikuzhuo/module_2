@@ -4,12 +4,14 @@ import CaseStudy.ZooManagement.Model.Class.*;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
 public class AnimalFile {
     public static final String PARENT_PATH = "src/CaseStudy/ZooManagement/File/AnimalFile";
+    public static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     public static List<ZooAnimal> readAnimalFromFile() {
         List<ZooAnimal> animalList = new ArrayList<>();
@@ -44,9 +46,9 @@ public class AnimalFile {
             String ID = animalString[0];
             String name = animalString[1];
             String gender = animalString[2];
-            LocalDate birthDate = LocalDate.parse(animalString[3]);
-            LocalDate moveInDate = LocalDate.parse(animalString[4]);
+            LocalDate birthDate = LocalDate.parse(animalString[3].replace("-","/"),dateTimeFormatter);
             String originFrom = animalString[5];
+            LocalDate moveInDate = LocalDate.parse(animalString[4].replace("-","/"),dateTimeFormatter);
             String inchargeBy = animalString[6];
             String note = animalString[7];
 
@@ -79,7 +81,6 @@ public class AnimalFile {
                 if (list.get(i) != null) {
                     bufferedWriter.write(list.get(i).convertToLine());
                     bufferedWriter.newLine();
-                    System.out.println(bufferedWriter);
                 }
             }
             bufferedWriter.close();

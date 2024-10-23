@@ -186,7 +186,7 @@ public class AnimalControl {
                     // input note
                     System.out.println("Input note of animal number " + (i + 1) + ":");
                     zooAnimal.setNote(today + "Created Animal; Food need to prepare: " + zooAnimal.eatFood()
-                            + ". Other note: " + scanner.nextLine() + ".");
+                            + " + other note: " + scanner.nextLine() + ".");
 
                     animalTempList[i] = zooAnimal;
                 }
@@ -322,7 +322,7 @@ public class AnimalControl {
                                     System.out.println("Date format not correct. Kindly re-input.");
                                     check = false;
                                 }
-                            }while (!check);
+                            } while (!check);
                             updateAnimal.setBirthDate(LocalDate.parse(tempBirthDate, dateTimeFormatter));
                             break;
                         case 3:
@@ -398,7 +398,7 @@ public class AnimalControl {
                             }
                         case 7:
                             System.out.println("Input note of " + updateAnimal.getID());
-                            updateAnimal.setNote(updateAnimal.getNote() + today + scanner.nextLine() + ".");
+                            updateAnimal.setNote(updateAnimal.getNote() + " / " + today + ": " + scanner.nextLine() + ".");
                             break;
                         case 8:
                             continueEditing = false;

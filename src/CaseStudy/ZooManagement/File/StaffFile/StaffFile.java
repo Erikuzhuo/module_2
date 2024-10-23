@@ -4,11 +4,13 @@ import CaseStudy.ZooManagement.Model.Class.ZooStaff;
 
 import java.io.*;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
 public class StaffFile {
     public static final String PARENT_PATH = "src/CaseStudy/ZooManagement/File/StaffFile";
+    public static DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
 
     public static List<ZooStaff> readStaffFromFile() {
         List<ZooStaff> staffList = new ArrayList<>();
@@ -42,9 +44,9 @@ public class StaffFile {
             String ID = staffString[0];
             String name = staffString[1];
             String gender = staffString[2];
-            LocalDate birthDate = LocalDate.parse(staffString[3]);
-            LocalDate hireDate = LocalDate.parse(staffString[4]);
+            LocalDate birthDate = LocalDate.parse(staffString[3].replace("-","/"),dateTimeFormatter);
             String position = staffString[5];
+            LocalDate hireDate = LocalDate.parse(staffString[4].replace("-","/"),dateTimeFormatter);
             double salary = Double.parseDouble(staffString[6]);
             String email = staffString[7];
             String phoneNumber = staffString[8];
@@ -73,10 +75,10 @@ public class StaffFile {
                 if (list.get(i) != null) {
                     bufferedWriter.write(list.get(i).convertToLine());
                     bufferedWriter.newLine();
-                    System.out.println(bufferedWriter);
                 }
             }
             bufferedWriter.close();
+            fileWriter.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
