@@ -31,9 +31,9 @@ public class AnimalFile {
                 String[] animalString = line.split(",");
                 ZooAnimal animal = getZooAnimal(animalString);
                 animalList.add(animal);
-                bufferedReader.close();
-                fileReader.close();
             }
+            bufferedReader.close();
+            fileReader.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -46,9 +46,9 @@ public class AnimalFile {
             String ID = animalString[0];
             String name = animalString[1];
             String gender = animalString[2];
-            LocalDate birthDate = LocalDate.parse(animalString[3].replace("-","/"),dateTimeFormatter);
+            LocalDate birthDate = LocalDate.parse(animalString[3].replace("-", "/"), dateTimeFormatter);
             String originFrom = animalString[4];
-            LocalDate moveInDate = LocalDate.parse(animalString[5].replace("-","/"),dateTimeFormatter);
+            LocalDate moveInDate = LocalDate.parse(animalString[5].replace("-", "/"), dateTimeFormatter);
             String inchargeBy = animalString[6];
             String note = animalString[7];
 

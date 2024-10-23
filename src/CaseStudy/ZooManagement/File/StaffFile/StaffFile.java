@@ -30,8 +30,9 @@ public class StaffFile {
                 String[] staffString = line.split(",");
                 ZooStaff staff = getZooStaff(staffString);
                 staffList.add(staff);
-                bufferedReader.close();
             }
+            bufferedReader.close();
+            fileReader.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -44,9 +45,9 @@ public class StaffFile {
             String ID = staffString[0];
             String name = staffString[1];
             String gender = staffString[2];
-            LocalDate birthDate = LocalDate.parse(staffString[3].replace("-","/"),dateTimeFormatter);
+            LocalDate birthDate = LocalDate.parse(staffString[3].replace("-", "/"), dateTimeFormatter);
             String position = staffString[4];
-            LocalDate hireDate = LocalDate.parse(staffString[5].replace("-","/"),dateTimeFormatter);
+            LocalDate hireDate = LocalDate.parse(staffString[5].replace("-", "/"), dateTimeFormatter);
             double salary = Double.parseDouble(staffString[6]);
             String email = staffString[7];
             String phoneNumber = staffString[8];
